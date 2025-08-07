@@ -66,22 +66,42 @@ with st.form("absen_form"):
     submitted = st.form_submit_button("✅ Submit")
 
     if submitted:
-        jumlah_peserta = get_participant_count(tanggal_hadir, sesi, status="Hadir")
-    
-        if jumlah_peserta < 6:
-            status = "Hadir"
+        if not nama or not no_hp or not email or not alamat:
+            st.warning("⚠️ Harap lengkapi semua data sebelum submit.")
+        elif upload_status != "Sudah Upload":
+            st.warning("⚠️ Harap upload bukti pembayaran terlebih dahulu ke Google Form atau Whatsapp : 087720036581 (Admin HoC).")
         else:
-            jumlah_waiting = get_participant_count(tanggal_hadir, sesi, status="Waiting List")
-            if jumlah_waiting < 3:
-                status = "Waiting List"
+            # Hitung peserta confirmed & waiting list untuk sesi tersebut
+            confirmed_count = get_participant_count(tanggal_hadir, sesi, status="Confirmed")
+            waiting_list_count = get_participant_count(tanggal_hadir, sesi, status="Waiting List")
+
+            if confirmed_count >= 6 and waiting_list_count >= 3:
+                st.error("❌ Sesi ini sudah penuh dan waiting list juga penuh. Silakan pilih sesi lain.")
             else:
-                st.error("Sesi ini sudah penuh termasuk waiting list. Silakan pilih sesi lain.")
-                st.stop()
-    
-        data = [nama, umur, jenis_kelamin, alamat, tanggal_hadir, sesi, status]
-        append_row(data)
-        st.success(f"Berhasil mendaftar sebagai '{status}' untuk sesi {sesi} pada {tanggal_hadir}")
-        st.balloons()
+                if confirmed_count < 6:
+                    status = "Confirmed"
+                    st.success("✅ Absensi berhasil disimpan. Terimakasih sudah mendaftar!")
+                    st.balloons()
+                else:
+                    status = "Waiting List"
+                    st.info("📋 Sesi sudah penuh. Kamu masuk ke *Waiting List*. Admin akan hubungi jika ada slot kosong.")
+
+                append_row([
+                    nama,
+                    umur,
+                    jenis_kelamin,
+                    no_hp,
+                    email,
+                    alamat,
+                    tanggal_hadir,
+                    sesi,
+                    status_pembayaran,
+                    upload_status,
+                    status  # ← Tambahan kolom status
+                ])
+
+                st.markdown("📎 [Upload Ulang Bukti jika Diperlukan](https://forms.gle/txyE7MbHueSJWjC66)")
+
 
 
         st.markdown("📎 [Upload Ulang Bukti jika Diperlukan](https://forms.gle/txyE7MbHueSJWjC66)")
