@@ -21,6 +21,10 @@ SPREADSHEET_NAME = 'Data_Absensi'
 SHEET_NAME = 'Sheet1'
 sheet = client.open(SPREADSHEET_NAME).worksheet(SHEET_NAME)
 
+def get_worksheet_df():
+    data = worksheet.get_all_records()
+    return pd.DataFrame(data)
+
 def get_participant_count(tanggal, sesi, status=None):
     df = get_worksheet_df()
     if df.empty:
@@ -46,4 +50,5 @@ def get_all_data():
     except Exception as e:
         print(f"[ERROR] get_all_data: {e}")
         return []
+
 
