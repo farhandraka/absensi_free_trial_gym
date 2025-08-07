@@ -66,13 +66,19 @@ with st.form("absen_form"):
     submitted = st.form_submit_button("✅ Submit")
 
     if submitted:
-        if peserta_di_sesi >= kapasitas_maks:
-            st.error(f"❌ Sesi {sesi} pada tanggal {tanggal_label} sudah penuh.")
-        elif not nama or not no_hp or not email or not alamat:
+        if not nama or not no_hp or not email or not alamat:
             st.warning("⚠️ Harap lengkapi semua data sebelum submit.")
         elif upload_status != "Sudah Upload":
             st.warning("⚠️ Harap upload bukti pembayaran terlebih dahulu ke Google Form atau Whatsapp : 087720036581 (Admin HoC).")
         else:
+            if peserta_di_sesi >= kapasitas_maks:
+                status = "Waiting List"
+                st.info("📋 Sesi sudah penuh. Kamu masuk ke *Waiting List*. Admin akan hubungi jika ada slot kosong.")
+            else:
+                status = "Confirmed"
+                st.success("✅ Absensi berhasil disimpan. Terimakasih Sudah Daftar")
+                st.balloons()
+
             append_row([
                 nama,
                 umur,
@@ -83,9 +89,11 @@ with st.form("absen_form"):
                 tanggal_hadir,
                 sesi,
                 status_pembayaran,
-                upload_status
+                upload_status,
+                status  # ← kolom tambahan di spreadsheet
             ])
             st.success("✅ Absensi berhasil disimpan. Terimakasih Sudah Daftar")
             st.balloons()
 
             st.markdown("📎 [Upload Ulang Bukti jika Diperlukan](https://forms.gle/txyE7MbHueSJWjC66)")
+
