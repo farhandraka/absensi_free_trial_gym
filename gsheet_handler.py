@@ -1,6 +1,7 @@
 import gspread
 import streamlit as st
 import json
+import pandas as pd
 from oauth2client.service_account import ServiceAccountCredentials
 
 # Ambil kredensial dari Streamlit secrets
@@ -50,6 +51,3 @@ def get_all_data():
     except Exception as e:
         print(f"[ERROR] get_all_data: {e}")
         return []
-
-
-
