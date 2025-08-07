@@ -41,8 +41,14 @@ sesi, kapasitas_maks = sesi_mapping[sesi_pilihan_label]
 
 # Cek slot sesi
 peserta_di_sesi = get_participant_count(tanggal_hadir, sesi)
+
 if peserta_di_sesi >= kapasitas_maks:
     st.warning(f"❌ Sesi ini sudah penuh ({peserta_di_sesi}/{kapasitas_maks})")
+    
+    # Tambahan informasi jika waiting list juga penuh
+    if peserta_di_sesi >= kapasitas_maks + 3:
+        st.info(f"⚠️ Info: Sesi ini sudah mencapai batas maksimum termasuk waiting list yaitu {kapasitas_maks + 3} orang. "
+                f"Silakan pilih sesi lain karena waiting list juga sudah penuh.")
 else:
     st.success(f"✅ Slot tersedia: {kapasitas_maks - peserta_di_sesi} dari {kapasitas_maks}")
 
@@ -98,3 +104,4 @@ with st.form("absen_form"):
                 ])
 
                 st.markdown("📎 [Upload Ulang Bukti jika Diperlukan](https://forms.gle/txyE7MbHueSJWjC66)")
+
