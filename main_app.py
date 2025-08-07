@@ -2,8 +2,8 @@ import streamlit as st
 from datetime import datetime
 from gsheet_handler import get_participant_count, append_row
 
-st.set_page_config(page_title="Absensi Free Trial Gym", layout="centered")
-st.title("📋 Form Absensi Free Trial - House of Caesar")
+st.set_page_config(page_title="Open Class / Free Trial House of Caesar", layout="centered")
+st.title("📋 Form Open Class/Free Trial - House of Caesar")
 
 # Tanggal hadir terbatas (khusus event)
 tanggal_opsi = {
@@ -86,5 +86,6 @@ with st.form("absen_form"):
             st.balloons()
 
             st.markdown("📎 [Upload Ulang Bukti jika Diperlukan](https://forms.gle/txyE7MbHueSJWjC66)")
+
 
 
