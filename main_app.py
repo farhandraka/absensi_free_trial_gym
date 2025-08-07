@@ -22,7 +22,6 @@ sesi_jadwal = {
     "Sesi 4": "15:45 - 17:30",
     "Sesi 5": "20:00 - 22:00"
 }
-kapasitas_maks = 8
 
 # Dropdown sesi + info kuota
 sesi_interaktif = []
@@ -30,13 +29,17 @@ sesi_mapping = {}
 for sesi, jam in sesi_jadwal.items():
     label_asli = f"{sesi} : {jam}"
     jumlah_peserta = get_participant_count(tanggal_hadir, label_asli)
-    label_ditampilkan = f"{label_asli} ({jumlah_peserta}/{kapasitas_maks})"
+
+    # Atur kapasitas berdasarkan sesi
+    kapasitas = 4 if sesi == "Sesi 5" else 6
+
+    label_ditampilkan = f"{label_asli} ({jumlah_peserta}/{kapasitas})"
     sesi_interaktif.append(label_ditampilkan)
-    sesi_mapping[label_ditampilkan] = label_asli
+    sesi_mapping[label_ditampilkan] = (label_asli, kapasitas)
 
 # Pilih sesi sebelum form
 sesi_pilihan_label = st.selectbox("🕒 Pilih Sesi (dengan info kuota)", sesi_interaktif)
-sesi = sesi_mapping[sesi_pilihan_label]
+sesi, kapasitas_maks = sesi_mapping[sesi_pilihan_label]
 
 # Tampilkan info kuota langsung
 peserta_di_sesi = get_participant_count(tanggal_hadir, sesi)
@@ -86,6 +89,3 @@ with st.form("absen_form"):
             st.balloons()
 
             st.markdown("📎 [Upload Ulang Bukti jika Diperlukan](https://forms.gle/txyE7MbHueSJWjC66)")
-
-
-
