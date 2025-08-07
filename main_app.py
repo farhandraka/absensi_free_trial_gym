@@ -7,7 +7,7 @@ st.title("📋 Form Absensi Free Trial - House of Caesar")
 
 # Tanggal hadir terbatas (khusus event)
 tanggal_opsi = {
-    "5 September 2025": "2025-09-05"
+    "5 September 2025": "2025-09-05",
     "6 September 2025": "2025-09-06",
     "7 September 2025": "2025-09-07"
 }
@@ -86,3 +86,4 @@ with st.form("absen_form"):
             st.balloons()
 
             st.markdown("📎 [Upload Ulang Bukti jika Diperlukan](https://forms.gle/txyE7MbHueSJWjC66)")
+
