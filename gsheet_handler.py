@@ -3,6 +3,7 @@ import streamlit as st
 import json
 import pandas as pd
 from oauth2client.service_account import ServiceAccountCredentials
+import time
 
 # Ambil kredensial dari Streamlit secrets
 creds_dict = json.loads(st.secrets["GOOGLE_CREDENTIALS"])
@@ -22,8 +23,20 @@ SPREADSHEET_NAME = 'Data_Absensi'
 SHEET_NAME = 'Sheet1'
 sheet = client.open(SPREADSHEET_NAME).worksheet(SHEET_NAME)
 
+# Retry function agar lebih stabil
+def safe_get_all_records(max_retries=3, wait_seconds=2):
+    for i in range(max_retries):
+        try:
+            return sheet.get_all_records()
+        except Exception as e:
+            if i < max_retries - 1:
+                time.sleep(wait_seconds)
+            else:
+                st.error("Gagal mengambil data dari Google Sheets. Coba beberapa saat lagi.")
+                return []
+
 def get_worksheet_df():
-    data = sheet.get_all_records()
+    data = safe_get_all_records()
     return pd.DataFrame(data)
 
 def get_participant_count(tanggal, sesi, status=None):
@@ -43,11 +56,11 @@ def append_row(data):
     try:
         sheet.append_row(data)
     except Exception as e:
-        print(f"[ERROR] append_row: {e}")
+        st.error(f"[ERROR] Gagal menyimpan data: {e}")
 
 def get_all_data():
     try:
         return sheet.get_all_records()
     except Exception as e:
-        print(f"[ERROR] get_all_data: {e}")
+        st.error(f"[ERROR] Gagal mengambil data: {e}")
         return []
