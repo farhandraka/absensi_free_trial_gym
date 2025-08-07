@@ -51,7 +51,7 @@ else:
 # --- FORM ---
 with st.form("absen_form"):
     nama = st.text_input("Nama Lengkap")
-    umur = st.number_input("Umur", min_value=12, max_value=99, step=1)
+    umur = st.number_input("Umur", min_value=7, max_value=99, step=1)
     jenis_kelamin = st.selectbox("Jenis Kelamin", ["Laki-laki", "Perempuan"])
     no_hp = st.text_input("Nomor HP")
     email = st.text_input("Email")
@@ -94,5 +94,6 @@ with st.form("absen_form"):
             ])
 
             st.markdown("📎 [Upload Ulang Bukti jika Diperlukan](https://forms.gle/txyE7MbHueSJWjC66)")
+
 
 
