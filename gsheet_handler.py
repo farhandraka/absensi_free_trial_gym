@@ -21,13 +21,18 @@ SPREADSHEET_NAME = 'Data_Absensi'
 SHEET_NAME = 'Sheet1'
 sheet = client.open(SPREADSHEET_NAME).worksheet(SHEET_NAME)
 
-def get_participant_count(tanggal, sesi):
-    try:
-        data = sheet.get_all_records()
-        return sum(1 for row in data if str(row.get('Tanggal Hadir')) == tanggal and str(row.get('Sesi')) == sesi)
-    except Exception as e:
-        print(f"[ERROR] get_participant_count: {e}")
+def get_participant_count(tanggal, sesi, status=None):
+    df = get_worksheet_df()
+    if df.empty:
         return 0
+
+    df = df[df['Tanggal Hadir'] == tanggal]
+    df = df[df['Sesi'] == sesi]
+
+    if status:
+        df = df[df['Status'] == status]
+
+    return len(df)
 
 def append_row(data):
     try:
@@ -41,3 +46,4 @@ def get_all_data():
     except Exception as e:
         print(f"[ERROR] get_all_data: {e}")
         return []
+
