@@ -55,7 +55,7 @@ with st.form("absen_form"):
     alamat = st.text_area("Alamat")
 
     st.markdown("### 📎 [Upload Bukti Pembayaran di Google Form](https://forms.gle/txyE7MbHueSJWjC66)")
-    st.caption("*Mohon untuk upload bukti pembayaran terlebih dahulu sebelum melanjutkan atau bisa kirim bukti pembayaran ke whatsapp admin : 087720036581*")
+    st.caption("*Mohon untuk upload bukti pembayaran terlebih dahulu sebelum melanjutkan atau bisa kirim bukti pembayaran ke whatsapp admin House of Caesar : 087720036581*")
 
     upload_status = st.selectbox("Status Upload Bukti di Google Form atau Whatsapp Admin", ["Belum Upload", "Sudah Upload"])
     status_pembayaran = st.selectbox("Status Pembayaran", ["Sudah Bayar"])
@@ -86,4 +86,5 @@ with st.form("absen_form"):
             st.balloons()
 
             st.markdown("📎 [Upload Ulang Bukti jika Diperlukan](https://forms.gle/txyE7MbHueSJWjC66)")
+
 
