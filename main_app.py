@@ -7,6 +7,7 @@ st.title("📋 Form Absensi Free Trial - House of Caesar")
 
 # Tanggal hadir terbatas (khusus event)
 tanggal_opsi = {
+    "5 September 2025": "2025-09-05"
     "6 September 2025": "2025-09-06",
     "7 September 2025": "2025-09-07"
 }
@@ -21,7 +22,7 @@ sesi_jadwal = {
     "Sesi 4": "15:45 - 17:30",
     "Sesi 5": "20:00 - 22:00"
 }
-kapasitas_maks = 6
+kapasitas_maks = 8
 
 # Dropdown sesi + info kuota
 sesi_interaktif = []
@@ -54,9 +55,9 @@ with st.form("absen_form"):
     alamat = st.text_area("Alamat")
 
     st.markdown("### 📎 [Upload Bukti Pembayaran di Google Form](https://forms.gle/txyE7MbHueSJWjC66)")
-    st.caption("*Mohon untuk upload bukti pembayaran terlebih dahulu sebelum melanjutkan.*")
+    st.caption("*Mohon untuk upload bukti pembayaran terlebih dahulu sebelum melanjutkan atau bisa kirim bukti pembayaran ke whatsapp admin : 087720036581*")
 
-    upload_status = st.selectbox("Status Upload Bukti di Google Form", ["Belum Upload", "Sudah Upload"])
+    upload_status = st.selectbox("Status Upload Bukti di Google Form atau Whatsapp Admin", ["Belum Upload", "Sudah Upload"])
     status_pembayaran = st.selectbox("Status Pembayaran", ["Sudah Bayar"])
 
     submitted = st.form_submit_button("✅ Submit")
@@ -67,7 +68,7 @@ with st.form("absen_form"):
         elif not nama or not no_hp or not email or not alamat:
             st.warning("⚠️ Harap lengkapi semua data sebelum submit.")
         elif upload_status != "Sudah Upload":
-            st.warning("⚠️ Harap upload bukti pembayaran terlebih dahulu ke Google Form.")
+            st.warning("⚠️ Harap upload bukti pembayaran terlebih dahulu ke Google Form atau Whatsapp : 087720036581 (Admin HoC).")
         else:
             append_row([
                 nama,
@@ -83,4 +84,5 @@ with st.form("absen_form"):
             ])
             st.success("✅ Absensi berhasil disimpan. Terimakasih Sudah Daftar")
             st.balloons()
+
             st.markdown("📎 [Upload Ulang Bukti jika Diperlukan](https://forms.gle/txyE7MbHueSJWjC66)")
