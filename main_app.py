@@ -92,8 +92,7 @@ with st.form("absen_form"):
                 upload_status,
                 status  # ← kolom tambahan di spreadsheet
             ])
-            st.success("✅ Absensi berhasil disimpan. Terimakasih Sudah Daftar")
-            st.balloons()
 
             st.markdown("📎 [Upload Ulang Bukti jika Diperlukan](https://forms.gle/txyE7MbHueSJWjC66)")
+
 
