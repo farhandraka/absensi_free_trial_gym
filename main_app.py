@@ -64,7 +64,7 @@ with st.form("absen_form"):
     st.markdown("### 📎 [Upload Bukti Pembayaran di Google Form](https://forms.gle/txyE7MbHueSJWjC66)")
     st.caption("**Bank Mandiri** : *1240013317939* Atas Nama **Caesesya Fitra Adrila**")
     st.caption("**Bank Syariah Indonesia (BSI)** : *7153435531* Atas Nama **Caesesya Fitra Adrila**")
-    st.caption("**Bank Central Asia (BCA)** : *6042810955* Atas Nama **Siti Badriah**")
+    st.caption("**Bank Central Asia (BCA)** : *6042810955* Atas Nama **Siti Bararah**")
     st.caption("*Mohon untuk upload bukti pembayaran terlebih dahulu sebelum melanjutkan atau bisa kirim bukti pembayaran ke whatsapp admin House of Caesar : 087720036581*")
 
     upload_status = st.selectbox("Status Upload Bukti di Google Form atau Whatsapp Admin", ["Belum Upload", "Sudah Upload"])
@@ -107,6 +107,7 @@ with st.form("absen_form"):
                 ])
 
                 st.markdown("📎 [Upload Ulang Bukti jika Diperlukan](https://forms.gle/txyE7MbHueSJWjC66)")
+
 
 
 
