@@ -62,6 +62,7 @@ with st.form("absen_form"):
     alamat = st.text_area("Alamat")
 
     st.markdown("### 📎 [Upload Bukti Pembayaran di Google Form](https://forms.gle/txyE7MbHueSJWjC66)")
+    st.caption("**⚠️ Info : Booking session Rp 50.000 dan akan dikembalikan saat selesai latihan**")
     st.caption("**Bank Mandiri** : *1240013317939* Atas Nama **Caesesya Fitra Adrila**")
     st.caption("**Bank Syariah Indonesia (BSI)** : *7153435531* Atas Nama **Caesesya Fitra Adrila**")
     st.caption("**Bank Central Asia (BCA)** : *6042810955* Atas Nama **Siti Bararah**")
@@ -107,6 +108,7 @@ with st.form("absen_form"):
                 ])
 
                 st.markdown("📎 [Upload Ulang Bukti jika Diperlukan](https://forms.gle/txyE7MbHueSJWjC66)")
+
 
 
 
